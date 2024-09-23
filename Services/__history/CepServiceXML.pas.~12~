@@ -1,0 +1,114 @@
+// CepServiceXML.pas
+unit CepServiceXML;
+
+interface
+
+uses
+  ICepService, System.SysUtils, System.Net.HttpClient, Xml.XMLDoc, Xml.XMLIntf,System.Net.HttpClientComponent;
+
+type
+  TCepServiceXML = class(TInterfacedObject, ICepServices)
+  public
+    function ConsultarCepPorCep(const ACep: string): string;
+    function ConsultarCepPorEndereco(const AEstado, ACidade, ALogradouro: string): string;
+  end;
+
+implementation
+
+{ TCepServiceXML }
+
+function TCepServiceXML.ConsultarCepPorCep(const ACep: string): string;
+var
+  HttpClient: TNetHTTPClient;
+  Response: IHTTPResponse;
+  RootNode, EnderecoNode: IXMLNode;
+  XMLDoc: IXMLDocument;
+  Logradouro, Bairro, Localidade, UF: string;
+begin
+  HttpClient := TNetHTTPClient.Create(nil);
+  try
+    Response := HttpClient.Get('https://viacep.com.br/ws/' + ACep + '/xml/');
+    if Response.StatusCode = 200 then
+    begin
+      XMLDoc := TXMLDocument.Create(nil);
+      try
+        XMLDoc.LoadFromXML(Response.ContentAsString);
+        XMLDoc.Active := True;
+
+        // Acessar o nó raiz <xmlcep>
+        RootNode := XMLDoc.DocumentElement;
+
+        // Acessar o nó <endereco> dentro de <enderecos>
+        EnderecoNode := RootNode.ChildNodes['enderecos'].ChildNodes['endereco'];
+
+        if Assigned(EnderecoNode) then
+        begin
+          // Pegar os valores dos elementos dentro de <endereco>
+          Logradouro := EnderecoNode.ChildNodes['logradouro'].Text;
+          Bairro := EnderecoNode.ChildNodes['bairro'].Text;
+          Localidade := EnderecoNode.ChildNodes['localidade'].Text;
+          UF := EnderecoNode.ChildNodes['uf'].Text;
+
+          Result := Format('Logradouro: %s, Bairro: %s, Cidade: %s, UF: %s',
+                           [Logradouro, Bairro, Localidade, UF]);
+        end;
+      finally
+        XMLDoc := nil;
+      end;
+    end
+    else
+      raise Exception.CreateFmt('Erro ao consultar CEP (XML): %d - %s', [Response.StatusCode, Response.StatusText]);
+  finally
+    HttpClient.Free;
+  end;
+end;
+
+function TCepServiceXML.ConsultarCepPorEndereco(const AEstado, ACidade, ALogradouro: string): string;
+var
+  HttpClient: TNetHTTPClient;
+  Response: IHTTPResponse;
+  RootNode, EnderecoNode: IXMLNode;
+  URL, XML: string;
+  XMLDoc: IXMLDocument;
+  Logradouro, Bairro, Localidade, UF: string;
+begin
+  HttpClient := TNetHTTPClient.Create(nil);
+  try
+    // ViaCEP não suporta diretamente busca por endereço, mas para o MVP, consideramos um exemplo fictício
+    URL := Format('https://viacep.com.br/ws/%s/%s/%s/xml/', [AEstado, ACidade, ALogradouro]);
+    Response := HttpClient.Get(URL);
+    if Response.StatusCode = 200 then
+    begin
+      XMLDoc := TXMLDocument.Create(nil);
+      try
+        XML := Response.ContentAsString;
+        XML := StringReplace(XML, #$A, '', [rfReplaceAll]); // Remove ''#$A'';
+        //
+        XMLDoc.LoadFromXML(XML);
+        XMLDoc.Active := True;
+        // Acessar o nó raiz <xmlcep>
+        RootNode := XMLDoc.DocumentElement;
+
+        // Acessar o nó <endereco> dentro de <enderecos>
+        EnderecoNode := RootNode.ChildNodes['enderecos'].ChildNodes['endereco'];
+
+        Logradouro := EnderecoNode.ChildNodes['logradouro'].Text;
+        Bairro := EnderecoNode.ChildNodes['bairro'].Text;
+        Localidade := EnderecoNode.ChildNodes['localidade'].Text;
+        UF := EnderecoNode.ChildNodes['uf'].Text;
+
+        Result := Format('Logradouro: %s, Bairro: %s, Cidade: %s, UF: %s',
+                         [Logradouro, Bairro, Localidade, UF]);
+      finally
+        XMLDoc := nil;
+      end;
+    end
+    else
+      raise Exception.CreateFmt('Erro ao consultar CEP por endereço (XML): %d - %s', [Response.StatusCode, Response.StatusText]);
+  finally
+    HttpClient.Free;
+  end;
+end;
+
+end.
+

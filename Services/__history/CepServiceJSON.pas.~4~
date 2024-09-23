@@ -1,0 +1,53 @@
+unit CepServiceJSON;
+
+interface
+
+uses
+  ICepService, System.SysUtils, IdHTTP, IdException, System.Classes;
+
+type
+  TCepServiceJSON = class(TInterfacedObject, ICepServices)
+  public
+    function ConsultarCepPorCep(const ACep: string): string;
+    function ConsultarCepPorEndereco(const AEstado, ACidade, ALogradouro: string): string;
+  end;
+
+implementation
+
+{ TCepServiceJSON }
+
+function TCepServiceJSON.ConsultarCepPorCep(const ACep: string): string;
+var
+  IdHTTP: TIdHTTP;
+begin
+  IdHTTP := TIdHTTP.Create(nil);
+  try
+    Result := IdHTTP.Get('https://viacep.com.br/ws/'+ACEP+'/json/');
+  except
+    on E: EIdHTTPProtocolException do
+      raise Exception.Create('Erro ao consultar CEP: ' + E.ErrorMessage);
+    on E: Exception do
+      raise Exception.Create('Erro: ' + E.Message);
+  end;
+end;
+
+function TCepServiceJSON.ConsultarCepPorEndereco(const AEstado, ACidade, ALogradouro: string): string;
+var
+  IdHTTP: TIdHTTP;
+  URL: string;
+begin
+  IdHTTP := TIdHTTP.Create(nil);
+  try
+    // ViaCEP não suporta diretamente busca por endereço, mas para o MVP, consideramos um exemplo fictício
+    URL := Format('https://viacep.com.br/ws/%s/%s/%s/json/', [AEstado, ACidade, ALogradouro]);
+    Result := IdHTTP.Get(URL);
+  except
+    on E: EIdHTTPProtocolException do
+      raise Exception.Create('Erro ao consultar CEP por endereço: ' + E.ErrorMessage);
+    on E: Exception do
+      raise Exception.Create('Erro: ' + E.Message);
+  end;
+end;
+
+end.
+

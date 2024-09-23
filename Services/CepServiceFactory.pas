@@ -1,0 +1,29 @@
+unit CepServiceFactory;
+
+interface
+
+uses
+  ICepService, CepServiceJSON, CepServiceXML, System.SysUtils;
+
+type
+  TCepServiceFactory = class
+  public
+    class function CreateCepService(AFormat: string): ICepServices;
+  end;
+
+implementation
+
+{ TCepServiceFactory }
+
+class function TCepServiceFactory.CreateCepService(AFormat: string): ICepServices;
+begin
+  if SameText(AFormat, 'JSON') then
+    Result := TCepServiceJSON.Create
+  else if SameText(AFormat, 'XML') then
+    Result := TCepServiceXML.Create
+  else
+    raise Exception.Create('Formato inválido. Use "JSON" ou "XML".');
+end;
+
+end.
+
