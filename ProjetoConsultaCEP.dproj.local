@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/09/21 16:36:41.000.205,=C:\Users\giovani\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:00:58.000.194,=C:\Users\giovani\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:01:26.000.678,F:\Teste Delphi CEP\uPrincipal.pas=C:\Users\giovani\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:01:26.000.678,F:\Teste Delphi CEP\uPrincipal.dfm=C:\Users\giovani\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2024/09/21 17:01:34.000.178,F:\Teste Delphi CEP\ProjetoConsultaCEP.dproj=C:\Users\giovani\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/09/21 17:01:39.000.459,=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:02:13.000.850,F:\Teste Delphi CEP\Interface\ICepService.pas=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:02:45.000.162,=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:03:00.000.271,F:\Teste Delphi CEP\Models\Cep.pas=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:03:17.000.021,=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:03:34.000.161,F:\Teste Delphi CEP\Services\CepServiceJSON.pas=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:04:50.000.521,=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:04:58.000.786,F:\Teste Delphi CEP\Services\CepServiceXML.pas=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:05:21.000.317,=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:05:28.000.770,F:\Teste Delphi CEP\Services\CepServiceFactory.pas=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:05:41.000.505,=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+    <Transaction>2024/09/21 17:06:01.000.645,F:\Teste Delphi CEP\Components\ConsultaCepComponent.pas=F:\Teste Delphi CEP\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
