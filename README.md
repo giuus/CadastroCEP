@@ -63,8 +63,7 @@ Para executar este projeto, é necessário ter:
 ### Units
 - **CepServiceJSON.pas**: Implementação das consultas utilizando o formato JSON.
 - **CepServiceXML.pas**: Implementação das consultas utilizando o formato XML.
-- **DataModule.pas**: Gerenciamento da conexão com o banco de dados Firebird.
-- **MainForm.pas**: Interface principal com os campos de entrada e botões de ação.
+- **Principal.pas**: Interface principal com os campos de entrada e botões de ação e gerenciamento da conexão com o banco de dados Firebird.
 
 ### Banco de Dados
 - O banco de dados armazena os dados de CEP consultados, permitindo a validação e alteração das informações conforme necessário.
@@ -72,10 +71,5 @@ Para executar este projeto, é necessário ter:
 ## Contribuição
 Sinta-se à vontade para abrir *issues* e *pull requests* para sugerir melhorias ou correções.
 
-## Estrutura e Estilo
-
-- **Organização de Seções**: Cada seção foi claramente identificada com títulos e subtítulos.
-- **Listas**: As informações foram organizadas em listas para facilitar a leitura.
-- **Destaques**: Uso de negrito para destacar ações importantes, como o botão **"Consultar"**.
 ### Autor 
   - Giovani de Santi ([Giuus](https://github.com/giuus/))
