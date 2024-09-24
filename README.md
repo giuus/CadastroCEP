@@ -8,7 +8,7 @@ Este projeto em Delphi realiza consultas e cadastro de CEP utilizando a API ViaC
   - Consulta os dados de endereço a partir de um CEP.
   - Exibe os resultados na interface do usuário.
   
-- **Consulta por Endereço (Formato XML)**: 
+- **Consulta por Endereço (Formato JSON e XML)**: 
   - Permite a busca de endereços por estado, cidade e logradouro.
   
 - **Integração com Banco de Dados**: 
